@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title {
+            text-align: center;
+            font-family: "Comic Sans MS", sans-serif;
+            font-size: 25px;
+            padding: 10px 0;
+        }
+
+        .textarea {
+            width: 60%;
+            height: 400px;
+        }
+
+        .button-bar {
+            display: flex;
+            width: 60%;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        button {
+            width: 140px;
+            height: auto;
+            margin: 0 10px;
+            padding: 10px;
+            background: darksalmon;
+            border: 1px white solid;
+        }
+    </style>
+</head>
+<body>
+<div class="title">Case Converter</div>
+<textarea class="textarea"></textarea>
+<div class="button-bar">
+    <button id="upper-case" onclick="toUpperCase()">Upper Case</button>
+    <button id="lower-case" onclick="toLowerCase()">Lower Case</button>
+    <button id="proper-case" onclick="toProperCase()">Proper Case</button>
+    <button id="sentence-case" onclick="toSentencesCase()">Sentence Case</button>
+    <button id="save-text-file" onclick="saveTextFile()">Save Text File</button>
+</div>
+</body>
+
+<script>
+    function toUpperCase() {
+        const elem = document.querySelector('textarea');
+        document.querySelector('textarea').value = elem.value.toUpperCase()
+    }
+
+    function toLowerCase() {
+        const elem = document.querySelector('textarea');
+        document.querySelector('textarea').value = elem.value.toLowerCase()
+    }
+
+    function toProperCase() {
+        const elem = document.querySelector('textarea');
+        let oldArr = elem.value.split(' ');
+        let newArr = oldArr.map(val => val[0].toUpperCase() + val.slice(1).toLowerCase())
+        document.querySelector('textarea').value = newArr.join(' ')
+    }
+
+    function toSentencesCase() {
+        const elem = document.querySelector('textarea');
+        let oldArr = elem.value.split('. ');
+        let newArr = oldArr.map(val => val[0].toUpperCase() + val.slice(1).toLowerCase()).join('. ')
+        document.querySelector('textarea').value = newArr
+    }
+
+    function saveTextFile() {
+        let content = document.querySelector('textarea').value;
+        window.open("data:application/txt," + encodeURIComponent(content), "_self");
+    }
+
+</script>
+</html>
